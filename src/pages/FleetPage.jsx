@@ -1,5 +1,6 @@
 import MainLayout from "../layouts/MainLayout";
-import VehicleCard from "../components/VehicleCard";
+import ImageSlider from "../components/ImageSlider";
+import { fleetData } from "../data/fleetData";
 
 function FleetPage() {
   return (
@@ -10,53 +11,54 @@ function FleetPage() {
         </h1>
 
         <p className="text-xl">
-          Comfortable and reliable transportation across Sri Lanka
+          Real vehicles from Majestic Lanka Tours and Taxi
         </p>
       </section>
 
       <section className="py-20 bg-gray-100">
         <div className="max-w-7xl mx-auto px-6">
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {fleetData.map((vehicle) => (
+              <div
+                key={vehicle.id}
+                className="bg-white rounded-xl shadow-lg p-5 hover:shadow-2xl transition"
+              >
+                <ImageSlider
+                  images={vehicle.images}
+                  alt={vehicle.name}
+                />
 
-            <VehicleCard
-              image="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800"
-              name="Toyota Prius"
-              seats="3"
-            />
+                <h3 className="text-2xl font-bold mt-5 mb-2">
+                  {vehicle.name}
+                </h3>
 
-            <VehicleCard
-              image="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800"
-              name="Toyota KDH Van"
-              seats="10"
-            />
+                <p className="text-gray-600 mb-2">
+                  Type: {vehicle.type}
+                </p>
 
-            <VehicleCard
-              image="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800"
-              name="Luxury Sedan"
-              seats="4"
-            />
+                <p className="text-gray-600 mb-2">
+                  Seats: {vehicle.seats} Passengers
+                </p>
 
-            <VehicleCard
-              image="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800"
-              name="Tourist Mini Bus"
-              seats="15"
-            />
+                <p className="text-gray-600 mb-2">
+                  AC: {vehicle.ac}
+                </p>
 
-            <VehicleCard
-              image="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800"
-              name="SUV"
-              seats="5"
-            />
+                <p className="text-gray-600 mb-4">
+                  Luggage: {vehicle.luggage}
+                </p>
 
-            <VehicleCard
-              image="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800"
-              name="Premium Car"
-              seats="4"
-            />
-
+                <a
+                  href="https://wa.me/94703368386"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block bg-amber-500 text-white px-5 py-3 rounded-lg hover:bg-amber-600"
+                >
+                  Book via WhatsApp
+                </a>
+              </div>
+            ))}
           </div>
-
         </div>
       </section>
     </MainLayout>

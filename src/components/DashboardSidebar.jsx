@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function DashboardSidebar() {
   return (
     <div className="w-64 min-h-screen bg-blue-900 text-white p-6">
@@ -5,38 +7,60 @@ function DashboardSidebar() {
         Majestic Lanka
       </h2>
 
-      <ul className="space-y-4">
+      <ul className="space-y-6 text-lg">
 
-        <li className="hover:text-amber-400 cursor-pointer">
-          Dashboard
+        <li>
+          <Link to="/admin" className="hover:text-amber-400">
+            Dashboard
+          </Link>
         </li>
 
-        <li className="hover:text-amber-400 cursor-pointer">
-          Bookings
+        <li>
+          <Link to="/admin/bookings" className="hover:text-amber-400">
+            Bookings
+          </Link>
         </li>
 
-        <li className="hover:text-amber-400 cursor-pointer">
-          Tours
+        <li>
+          <Link to="/tours" className="hover:text-amber-400">
+            Tours
+          </Link>
         </li>
 
-        <li className="hover:text-amber-400 cursor-pointer">
-          Vehicles
+        <li>
+          <Link to="/admin/vehicles" className="hover:text-amber-400">
+            Vehicles
+          </Link>
         </li>
 
-        <li className="hover:text-amber-400 cursor-pointer">
-          Customers
+        <li>
+          <Link to="/admin/customers" className="hover:text-amber-400">
+            Customers
+          </Link>
         </li>
 
-        <li className="hover:text-amber-400 cursor-pointer">
-          Drivers
+        <li>
+          <Link to="/admin/drivers" className="hover:text-amber-400">
+            Drivers
+          </Link>
         </li>
 
-        <li className="hover:text-amber-400 cursor-pointer">
-          AI Assistant
+        <li>
+          <Link to="/admin/analytics" className="hover:text-amber-400">
+            Analytics
+          </Link>
         </li>
 
-        <li className="hover:text-amber-400 cursor-pointer">
-          Settings
+        <li>
+          <Link to="/admin/ai" className="hover:text-amber-400">
+            AI Assistant
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/admin/settings" className="hover:text-amber-400">
+            Settings
+          </Link>
         </li>
 
       </ul>

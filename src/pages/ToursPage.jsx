@@ -1,5 +1,6 @@
 import MainLayout from "../layouts/MainLayout";
-import TourCard from "../components/TourCard";
+import ImageSlider from "../components/ImageSlider";
+import { tourData } from "../data/tourData";
 
 function ToursPage() {
   return (
@@ -10,59 +11,45 @@ function ToursPage() {
         </h1>
 
         <p className="text-xl">
-          Explore the best destinations in Sri Lanka
+          Explore Sri Lanka with Majestic Lanka Tours and Taxi
         </p>
       </section>
 
       <section className="py-20 bg-gray-100">
         <div className="max-w-7xl mx-auto px-6">
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {tourData.map((tour) => (
+              <div
+                key={tour.id}
+                className="bg-white rounded-xl shadow-lg p-5 hover:shadow-2xl transition"
+              >
+                <ImageSlider images={tour.images} alt={tour.title} />
 
-            <TourCard
-              image="https://images.unsplash.com/photo-1590736969955-71cc94901144"
-              title="Sigiriya Tour"
-              duration="1 Day Tour"
-              description="Visit the famous Lion Rock Fortress."
-            />
+                <h3 className="text-2xl font-bold mt-5 mb-2">
+                  {tour.title}
+                </h3>
 
-            <TourCard
-              image="https://images.unsplash.com/photo-1580674285054-bed31e145f59"
-              title="Kandy Tour"
-              duration="2 Days"
-              description="Explore Sri Lanka's cultural capital."
-            />
+                <p className="text-amber-600 font-semibold mb-3">
+                  {tour.duration}
+                </p>
 
-            <TourCard
-              image="https://images.unsplash.com/photo-1578662996442-48f60103fc96"
-              title="Ella Tour"
-              duration="2 Days"
-              description="Enjoy mountain views and train journeys."
-            />
+                <p className="text-gray-600 mb-5">
+                  {tour.description}
+                </p>
 
-            <TourCard
-              image="https://images.unsplash.com/photo-1564507592333-c60657eea523"
-              title="Southern Coast"
-              duration="3 Days"
-              description="Visit beaches and Galle Fort."
-            />
-
-            <TourCard
-              image="https://images.unsplash.com/photo-1516939884455-1445c8652f83"
-              title="Yala Safari"
-              duration="1 Day"
-              description="Experience wildlife and leopard safaris."
-            />
-
-            <TourCard
-              image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
-              title="Nuwara Eliya"
-              duration="2 Days"
-              description="Tea plantations and cool climate."
-            />
-
+                <a
+                  href={`https://wa.me/94703368386?text=Hello%20Majestic%20Lanka%20Tours%20and%20Taxi,%20I%20want%20to%20book%20${encodeURIComponent(
+                    tour.title
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block bg-amber-500 text-white px-5 py-3 rounded-lg hover:bg-amber-600"
+                >
+                  Book via WhatsApp
+                </a>
+              </div>
+            ))}
           </div>
-
         </div>
       </section>
     </MainLayout>
