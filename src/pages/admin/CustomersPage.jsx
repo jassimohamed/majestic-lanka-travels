@@ -1,56 +1,86 @@
+import { useEffect, useState } from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
 
 function CustomersPage() {
-  const customers = [
-    { id: 1, name: "John Smith", email: "john@example.com", country: "UK", bookings: 3 },
-    { id: 2, name: "Sarah Lee", email: "sarah@example.com", country: "Australia", bookings: 2 },
-    { id: 3, name: "Ahmed Khan", email: "ahmed@example.com", country: "UAE", bookings: 4 },
-  ];
+  const [customers, setCustomers] = useState([]);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const loadCustomers = async () => {
+      const res = await fetch("http://localhost:5000/api/auth/users");
+      const result = await res.json();
+
+      if (result.success) {
+        setCustomers(result.data.filter((user) => user.role === "customer"));
+      }
+    };
+
+    loadCustomers();
+  }, []);
+
+  const filteredCustomers = customers.filter((customer) =>
+    `${customer.fullName} ${customer.email} ${customer.phone} ${customer.country}`
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  );
 
   return (
     <DashboardLayout>
-      <h1 className="text-4xl font-bold mb-8">Customer Management</h1>
+      <div className="p-8 bg-[#050505] min-h-screen text-white">
+        <p className="uppercase tracking-[4px] text-[#D4AF37]">
+          Admin Panel
+        </p>
 
-      <div className="bg-white rounded-xl shadow p-6">
-        <div className="flex justify-between items-center mb-6">
-          <input
-            type="text"
-            placeholder="Search customers..."
-            className="border p-3 rounded-lg w-72"
-          />
+        <h1 className="text-5xl font-bold mt-3 mb-10">
+          Customer Management
+        </h1>
 
-          <button className="bg-amber-500 text-white px-5 py-3 rounded-lg">
-            Add Customer
-          </button>
-        </div>
+        <div className="bg-[#181818] border border-[#D4AF37]/20 rounded-3xl p-8 overflow-x-auto">
+          <div className="flex justify-between items-center mb-6 gap-4">
+            <h2 className="text-2xl font-bold">All Customers</h2>
 
-        <table className="w-full">
-          <thead>
-            <tr className="border-b bg-gray-100">
-              <th className="text-left p-3">Customer</th>
-              <th className="text-left p-3">Email</th>
-              <th className="text-left p-3">Country</th>
-              <th className="text-left p-3">Bookings</th>
-              <th className="text-left p-3">Action</th>
-            </tr>
-          </thead>
+            <input
+              type="text"
+              placeholder="Search customers..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="bg-[#111111] rounded-xl p-4 outline-none border border-transparent focus:border-[#D4AF37]"
+            />
+          </div>
 
-          <tbody>
-            {customers.map((customer) => (
-              <tr key={customer.id} className="border-b">
-                <td className="p-3">{customer.name}</td>
-                <td className="p-3">{customer.email}</td>
-                <td className="p-3">{customer.country}</td>
-                <td className="p-3">{customer.bookings}</td>
-                <td className="p-3">
-                  <button className="bg-blue-900 text-white px-4 py-2 rounded-lg">
-                    View
-                  </button>
-                </td>
+          <table className="w-full min-w-[850px]">
+            <thead>
+              <tr className="border-b border-[#D4AF37]/20">
+                <th className="text-left py-4">Customer</th>
+                <th className="text-left py-4">Email</th>
+                <th className="text-left py-4">Phone</th>
+                <th className="text-left py-4">Country</th>
+                <th className="text-left py-4">Role</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {filteredCustomers.map((customer) => (
+                <tr
+                  key={customer._id}
+                  className="border-b border-[#D4AF37]/10 hover:bg-[#222222]"
+                >
+                  <td className="py-5 text-[#D4AF37] font-semibold">
+                    {customer.fullName}
+                  </td>
+                  <td>{customer.email}</td>
+                  <td>{customer.phone || "-"}</td>
+                  <td>{customer.country || "-"}</td>
+                  <td>{customer.role}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {filteredCustomers.length === 0 && (
+            <p className="text-gray-400 mt-6">No customers found.</p>
+          )}
+        </div>
       </div>
     </DashboardLayout>
   );

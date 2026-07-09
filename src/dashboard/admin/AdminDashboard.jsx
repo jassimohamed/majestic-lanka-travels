@@ -1,85 +1,42 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
+import DashboardStats from "../../components/admin/DashboardStats";
+import RevenueCard from "../../components/admin/RevenueCard";
+import DriverStats from "../../components/admin/DriverStats";
+import RecentBookings from "../../components/admin/RecentBookings";
 
 function AdminDashboard() {
   return (
     <DashboardLayout>
+      <div className="p-8 bg-[#050505] min-h-screen text-white">
 
-      <h1 className="text-4xl font-bold mb-8">
-        Admin Dashboard
-      </h1>
+        <p className="uppercase tracking-[4px] text-[#D4AF37]">
+          Admin Panel
+        </p>
 
-      <div className="grid md:grid-cols-4 gap-6">
+        <h1 className="text-5xl font-bold mt-3 mb-10">
+          Dashboard
+        </h1>
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h3 className="text-lg font-bold">
-            Total Bookings
-          </h3>
-          <p className="text-3xl mt-3">125</p>
+        {/* Statistics */}
+        <DashboardStats />
+
+        {/* Revenue & Driver Stats */}
+        <div className="grid lg:grid-cols-2 gap-8 mt-10">
+
+          <RevenueCard />
+
+          <DriverStats />
+
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h3 className="text-lg font-bold">
-            Customers
-          </h3>
-          <p className="text-3xl mt-3">85</p>
-        </div>
+        {/* Recent Bookings */}
+        <div className="mt-10">
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h3 className="text-lg font-bold">
-            Drivers
-          </h3>
-          <p className="text-3xl mt-3">12</p>
-        </div>
+          <RecentBookings />
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h3 className="text-lg font-bold">
-            Vehicles
-          </h3>
-          <p className="text-3xl mt-3">18</p>
         </div>
 
       </div>
-
-<div className="mt-10 bg-white rounded-xl shadow p-6">
-  <h2 className="text-2xl font-bold mb-6">
-    Recent Bookings
-  </h2>
-
-  <table className="w-full">
-    <thead>
-      <tr className="border-b">
-        <th className="text-left p-3">Customer</th>
-        <th className="text-left p-3">Tour</th>
-        <th className="text-left p-3">Date</th>
-        <th className="text-left p-3">Status</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr className="border-b">
-        <td className="p-3">John Smith</td>
-        <td className="p-3">Sigiriya Tour</td>
-        <td className="p-3">2026-06-25</td>
-        <td className="p-3 text-green-600">Confirmed</td>
-      </tr>
-
-      <tr className="border-b">
-        <td className="p-3">Sarah Lee</td>
-        <td className="p-3">Ella Tour</td>
-        <td className="p-3">2026-06-27</td>
-        <td className="p-3 text-yellow-600">Pending</td>
-      </tr>
-
-      <tr>
-        <td className="p-3">Ahmed Khan</td>
-        <td className="p-3">Yala Safari</td>
-        <td className="p-3">2026-06-30</td>
-        <td className="p-3 text-blue-600">Assigned</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
     </DashboardLayout>
   );
 }

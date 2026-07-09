@@ -2,14 +2,14 @@ import DashboardSidebar from "../components/DashboardSidebar";
 
 function DashboardLayout({ children }) {
   return (
-    <div className="flex">
+    <div className="min-h-screen bg-[#050505] text-white flex">
+      <aside className="w-64 shrink-0 relative z-50">
+        <DashboardSidebar />
+      </aside>
 
-      <DashboardSidebar />
-
-      <div className="flex-1 p-8 bg-gray-100 min-h-screen">
+      <main className="flex-1 min-w-0 relative z-10">
         {children}
-      </div>
-
+      </main>
     </div>
   );
 }

@@ -1,0 +1,26 @@
+export const sampleBookings = [
+  {
+    bookingId: "MLT-2026-1001",
+    fullName: "John Smith",
+    phone: "+44 7000 000000",
+    pickup: "Airport",
+    destination: "Galle",
+    vehicle: "Toyota Prius",
+    date: "2026-07-10",
+    status: "Pending",
+    price: 18000,
+    driver: "",
+  },
+  {
+    bookingId: "MLT-2026-1002",
+    fullName: "Sarah Lee",
+    phone: "+61 400 000000",
+    pickup: "Colombo",
+    destination: "Kandy",
+    vehicle: "Honda Vezel",
+    date: "2026-07-12",
+    status: "Driver Assigned",
+    price: 25000,
+    driver: "Driver 01",
+  },
+];
