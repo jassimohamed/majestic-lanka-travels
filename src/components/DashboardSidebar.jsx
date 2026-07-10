@@ -1,24 +1,34 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-function DashboardSidebar() {
+function DashboardSidebar({ onNavigate }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const role = user?.role;
 
+  const handleNavigate = () => {
+    if (onNavigate) {
+      onNavigate();
+    }
+  };
+
   const handleLogout = () => {
     logout();
+    handleNavigate();
     navigate("/");
   };
 
+  const linkClass =
+    "block w-full rounded-xl px-3 py-3 hover:bg-[#181818] hover:text-[#D4AF37] transition";
+
   return (
-    <div className="w-64 min-h-screen bg-[#050505] text-white border-r border-[#D4AF37]/20 p-6">
-      <h2 className="text-3xl font-bold text-[#D4AF37] mb-2">
+    <div className="w-full h-full min-h-screen bg-[#050505] text-white border-r border-[#D4AF37]/20 p-5 pt-6 overflow-y-auto">
+      <h2 className="text-3xl font-bold text-[#D4AF37] mb-2 pr-12">
         Majestic Lanka
       </h2>
 
-      <p className="text-gray-400 text-sm mb-10">
+      <p className="text-gray-400 text-sm mb-8">
         {role === "admin"
           ? "Admin Dashboard"
           : role === "driver"
@@ -26,45 +36,150 @@ function DashboardSidebar() {
           : "Customer Dashboard"}
       </p>
 
-      <ul className="space-y-5 text-lg">
+      <ul className="space-y-2 text-base">
         <li>
-          <Link to="/" className="block hover:text-[#D4AF37] transition">
+          <Link to="/" onClick={handleNavigate} className={linkClass}>
             🏠 Website Home
           </Link>
         </li>
 
         {role === "admin" && (
           <>
-            <li><Link to="/admin" className="block hover:text-[#D4AF37]">📊 Dashboard</Link></li>
-            <li><Link to="/admin/booking-management" className="block hover:text-[#D4AF37]">📋 Booking Management</Link></li>
-            <li><Link to="/admin/vehicles" className="block hover:text-[#D4AF37]">🚗 Vehicles</Link></li>
-            <li><Link to="/admin/pricing" className="block hover:text-[#D4AF37]">💰 Pricing</Link></li>
-            <li><Link to="/admin/customers" className="block hover:text-[#D4AF37]">👥 Customers</Link></li>
-            <li><Link to="/admin/drivers" className="block hover:text-[#D4AF37]">👨‍✈️ Drivers</Link></li>
-            <li><Link to="/admin/analytics" className="block hover:text-[#D4AF37]">📈 Analytics</Link></li>
-            <li><Link to="/ai" className="block hover:text-[#D4AF37]">🤖 AI Assistant</Link></li>
-            <li><Link to="/admin/settings" className="block hover:text-[#D4AF37]">⚙️ Settings</Link></li>
+            <li>
+              <Link
+                to="/admin"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                📊 Dashboard
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/admin/booking-management"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                📋 Booking Management
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/admin/vehicles"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                🚗 Vehicles
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/admin/customers"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                👥 Customers
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/admin/drivers"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                👨‍✈️ Drivers
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/admin/analytics"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                📈 Analytics
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/ai"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                🤖 AI Assistant
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/admin/settings"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                ⚙️ Settings
+              </Link>
+            </li>
           </>
         )}
 
         {role === "customer" && (
           <>
-            <li><Link to="/customer" className="block hover:text-[#D4AF37]">📊 Customer Dashboard</Link></li>
-            <li><Link to="/ai" className="block hover:text-[#D4AF37]">🤖 AI Assistant</Link></li>
+            <li>
+              <Link
+                to="/customer"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                📊 Customer Dashboard
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/ai"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                🤖 AI Assistant
+              </Link>
+            </li>
           </>
         )}
 
         {role === "driver" && (
           <>
-            <li><Link to="/driver" className="block hover:text-[#D4AF37]">🚖 Driver Dashboard</Link></li>
-            <li><Link to="/ai" className="block hover:text-[#D4AF37]">🤖 AI Assistant</Link></li>
+            <li>
+              <Link
+                to="/driver"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                🚖 Driver Dashboard
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/ai"
+                onClick={handleNavigate}
+                className={linkClass}
+              >
+                🤖 AI Assistant
+              </Link>
+            </li>
           </>
         )}
 
-        <li>
+        <li className="pt-4 border-t border-[#D4AF37]/20 mt-4">
           <button
+            type="button"
             onClick={handleLogout}
-            className="w-full text-left text-red-400 hover:text-red-300 transition"
+            className="block w-full text-left rounded-xl px-3 py-3 text-red-400 hover:bg-red-500/10 hover:text-red-300 transition"
           >
             🚪 Logout
           </button>

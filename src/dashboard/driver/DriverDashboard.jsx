@@ -44,12 +44,11 @@ function DriverDashboard() {
 
   return (
     <DashboardLayout>
-      <div className="p-8 bg-[#050505] min-h-screen text-white">
+     <div className="px-4 py-6 sm:p-6 lg:p-8 bg-[#050505] min-h-screen text-white overflow-hidden">
         <p className="uppercase tracking-[4px] text-[#D4AF37]">
           Driver Panel
         </p>
-
-        <h1 className="text-5xl font-bold mt-3 mb-4">
+<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-4 break-words">
           Driver Dashboard
         </h1>
 
