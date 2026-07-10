@@ -7,7 +7,7 @@ function CustomersPage() {
 
   useEffect(() => {
     const loadCustomers = async () => {
-      const res = await fetch("http://localhost:5000/api/auth/users");
+      fetch("https://majestic-lanka-travels-3.onrender.com/api/auth/users")
       const result = await res.json();
 
       if (result.success) {

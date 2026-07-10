@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:5000/api/bookings";
+const API_URL =
+  "https://majestic-lanka-travels-3.onrender.com/api/bookings";
 
 export async function getBookings() {
   const response = await fetch(API_URL);
